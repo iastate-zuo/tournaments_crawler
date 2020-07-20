@@ -117,3 +117,6 @@ dist
 .pnp.*
 .idea
 
+# temporary data store
+data/
+
