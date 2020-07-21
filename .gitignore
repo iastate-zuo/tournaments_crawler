@@ -119,4 +119,6 @@ dist
 
 # temporary data store
 data/
+vendor/
+.DS_Store/
 
