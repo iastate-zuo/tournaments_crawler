@@ -25,15 +25,30 @@ const loadYearData = async (url, year, callback) => {
 	console.log('parsing year data ... ');
 
   const $ = cheerio.load(data);
+  const meta = { date: '', };
+  const entries = [];
 
-  const tables = $('table.table.vnkr-table');
-  const titles = $('h3');
+	const titles = $('h3');
+	const tables = $('table.table.vnkr-table');
 
+  // try to find the tournament start date
   titles.each(function () {
-  	console.log($(this).text());
+  	const title = $(this).text();
+  	if (title && title.startsWith('Start Date:')) {
+			const dates = title.split('Start Date: ');
+			meta['date'] = dates && dates.length > 0 ? dates[1] : null;
+	  }
   });
 
-  // console.log(tables, titles);
+  // now save all records
+	let championTable = false;
+	tables.each(function () {
+
+	});
+
+  console.log(meta, entries, tables.length);
+
+  return { meta, entries, };
 };
 
 module.exports = loadYearData;
