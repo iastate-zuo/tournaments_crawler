@@ -2,6 +2,7 @@
 
 const loadEntryData = require('./steps/entry');
 const loadYearData = require('./steps/processYearData');
+const path = require('path');
 
 const tournaments = {};
 
@@ -33,12 +34,10 @@ loadEntryData().then(tour => {
 			legacyId: query[1],
 		};
 
-		if (t.year === "2019") {
-			loadYearData(t.link, t.year, loadPlayerData);
-		}
+		const data = loadYearData(t.link, t.year, loadPlayerData);
 	});
 
-	// console.log(tournaments);
+	console.log(tournaments);
 });
 
 const loadPlayerData = (link, callback) => {

@@ -1,6 +1,5 @@
 const axios = require('axios');
 const fs = require('fs');
-const filePath = './data/entry.html';
 
 const fsErrHandler = function (err, debug) {
 	if (err) {
@@ -36,7 +35,7 @@ const fetchData = async function (url, dest, debug) {
 };
 
 const writeData = function (content, dest, debug) {
-	if (!dest || !fs.existsSync(dest)) {
+	if (!dest) {
 		console.error("can't find the location to write:", dest);
 		return;
 	}
