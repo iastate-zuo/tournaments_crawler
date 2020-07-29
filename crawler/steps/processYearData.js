@@ -107,18 +107,9 @@ const loadYearData = async (url, year, callback) => {
 			}
 
 			const rawLink = links[0].attribs.href;
-			let gameLink = '';
-
-			if (links.length > 1) {
-				gameLink = baseUrl + links[1].attribs.href;
-			}
 
 			player['playerId'] = rawLink.split('?id=')[1];
 			player['link'] = baseUrl + rawLink;
-
-			if (gameLink) {
-				player['game'] = gameLink;
-			}
 
 			if (championTable) {
 				meta.champions.push(player);
@@ -133,12 +124,8 @@ const loadYearData = async (url, year, callback) => {
 		}
 	});
 
-	// if (year === "2019") {
-  //   console.log(meta, entries);
-	// }
-
-		const content = { meta, entries, }
-		writeData(JSON.stringify(content), fileLoc);
+	const content = { meta, entries, }
+	writeData(JSON.stringify(content), fileLoc);
 
   return content;
 };

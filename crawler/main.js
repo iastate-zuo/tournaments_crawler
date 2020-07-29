@@ -2,7 +2,7 @@
 
 const loadEntryData = require('./steps/entry');
 const loadYearData = require('./steps/processYearData');
-const path = require('path');
+const loadPlayerData = require("./steps/processGameData");
 
 const tournaments = {};
 
@@ -35,11 +35,15 @@ loadEntryData().then(tour => {
 		};
 
 		const data = loadYearData(t.link, t.year, loadPlayerData);
+
+		if (data && data['entries'] && data['entries'].length) {
+			data['entries'].forEach(etr => {
+				if (etr['game']) {
+					loadPlayerData(etr['game'], etr['playerId']);
+				}
+			});
+		}
 	});
 
 	console.log(tournaments);
 });
-
-const loadPlayerData = (link, callback) => {
-
-};
